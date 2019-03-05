@@ -4,7 +4,8 @@
   "description": "frontend react for djangorestframework inside django app 'frontend'",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "webpack --mode development ./taskmanager/frontend/src/index.js --output ./taskmanager/frontend/static/frontend/main.js",
+    "build": "webpack --mode production ./taskmanager/frontend/src/index.js --output ./taskmanager/frontend/static/frontend/main.js"
   },
   "repository": {
     "type": "git",

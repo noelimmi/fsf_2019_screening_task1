@@ -1,6 +1,6 @@
-from .models import Task
+from tasks.models import Task
 from rest_framework import viewsets, permissions
-from .serializers import TaskSerializer
+from tasks.serializers import TaskSerializer
 
 # Task Viewset
 

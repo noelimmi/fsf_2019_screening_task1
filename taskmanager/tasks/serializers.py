@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Task
+from tasks.models import Task
 
 
 # Task Serializers
