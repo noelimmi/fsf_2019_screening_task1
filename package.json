@@ -1,0 +1,33 @@
+{
+  "name": "taskmanager",
+  "version": "1.0.0",
+  "description": "frontend react for djangorestframework inside django app 'frontend'",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/noelimmi/fsf_2019_screening_task1.git"
+  },
+  "author": "Immanuel Irwin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/noelimmi/fsf_2019_screening_task1/issues"
+  },
+  "homepage": "https://github.com/noelimmi/fsf_2019_screening_task1#readme",
+  "devDependencies": {
+    "@babel/core": "^7.3.4",
+    "@babel/preset-env": "^7.3.4",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.5",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.2.3"
+  },
+  "dependencies": {
+    "prop-types": "^15.7.2",
+    "react": "^16.8.3",
+    "react-dom": "^16.8.3"
+  }
+}
