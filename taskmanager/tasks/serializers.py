@@ -3,7 +3,8 @@ from tasks.models import Task
 
 
 # Task Serializers
-class TaskSerializer(serializers.ModelSerializer):
+class TaskSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Task
-        fields = '__all__'
+        fields = ('url', 'id', 'title', 'desc',
+                  'assignee', 'status', 'created_at')
