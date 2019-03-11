@@ -25,6 +25,12 @@ class Form extends Component {
     const task = { title, desc, assignee, status };
     console.log(task);
     this.props.addTask(task);
+    this.setState({
+      title: "",
+      desc: "",
+      assignee: "",
+      status: "",
+    });
   };
 
   render() {

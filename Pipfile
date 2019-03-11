@@ -9,8 +9,8 @@ pylint = "*"
 
 [packages]
 djangorestframework = "==3.9.2"
-django-rest-knox = "==3.6.0"
 Django = "==2.1.7"
+django-rest-knox = "*"
 
 [requires]
 python_version = "3.6"
