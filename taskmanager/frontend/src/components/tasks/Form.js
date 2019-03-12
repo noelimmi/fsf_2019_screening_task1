@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import PropTypes from "prop-types";
+import propTypes from "prop-types";
 import { addTask } from "../../actions/tasks";
 
 class Form extends Component {
@@ -12,7 +12,7 @@ class Form extends Component {
   };
 
   static propTypes = {
-    addTask: PropTypes.func.isRequired,
+    addTask: propTypes.func.isRequired,
   };
 
   onChange = e =>
