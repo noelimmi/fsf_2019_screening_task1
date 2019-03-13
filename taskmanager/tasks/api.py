@@ -1,6 +1,6 @@
-from tasks.models import Task
+from tasks.models import Task, Comment
 from rest_framework import viewsets, permissions
-from tasks.serializers import TaskSerializer
+from tasks.serializers import TaskSerializer, CommentSerializer
 
 # Task Viewset
 
@@ -18,3 +18,16 @@ class TaskViewSet(viewsets.ModelViewSet):
     # to save owner when he create task
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
+
+
+class CommentViewSet(viewsets.ModelViewSet):
+    permission_classes = [
+        permissions.IsAuthenticated
+    ]
+    serializer_class = TaskSerializer
+
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)

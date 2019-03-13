@@ -4,6 +4,7 @@ import propTypes from "prop-types";
 import { getTasks, deleteTask } from "../../actions/tasks";
 
 export class Tasks extends Component {
+  //create method for edit handler
   static propTypes = {
     tasks: propTypes.array.isRequired,
     getTasks: propTypes.func.isRequired,
@@ -16,7 +17,7 @@ export class Tasks extends Component {
     return (
       <Fragment>
         <h2>Tasks</h2>
-        <table className="table table-striped">
+        <table className="table table-hover">
           <thead>
             <tr>
               <th>ID</th>
@@ -24,7 +25,7 @@ export class Tasks extends Component {
               <th>Description</th>
               <th>Assignee</th>
               <th>Status</th>
-              <th>Created</th>
+              <th />
               <th />
             </tr>
           </thead>
@@ -36,7 +37,11 @@ export class Tasks extends Component {
                 <td>{task.desc}</td>
                 <td>{task.assignee}</td>
                 <td>{task.status}</td>
-                <td>{task.created_at}</td>
+                <td>
+                  <button className="btn btn-success btn-sm">
+                    Edit Status
+                  </button>
+                </td>
                 <td>
                   <button
                     onClick={this.props.deleteTask.bind(this, task.id)}

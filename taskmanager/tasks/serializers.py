@@ -1,10 +1,20 @@
 from rest_framework import serializers
-from tasks.models import Task
+from tasks.models import Task, Comment
 
 
 # Task Serializers
-class TaskSerializer(serializers.HyperlinkedModelSerializer):
+class TaskSerializer(serializers.ModelSerializer):
+    taskcomments = serializers.StringRelatedField(many=True)
+
     class Meta:
         model = Task
-        fields = ('url', 'id', 'title', 'desc',
-                  'assignee', 'status', 'created_at')
+        fields = ('id', 'title', 'desc',
+                  'assignee', 'status', 'taskcomments')
+
+
+class CommentSerializer(serializers.ModelSerializer):
+    task = serializers.PrimaryKeyRelatedField
+
+    class Meta:
+        model = Comment
+        fields = ('id', 'task', 'content')

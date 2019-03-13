@@ -1,13 +1,13 @@
 import axios from "axios";
-
+import { tokenConfig } from "./auth";
 import { GET_TASKS, DELETE_TASK, ADD_TASK } from "./types";
 import { createMessage, returnErrors } from "./messages";
 
 // GET TASKS
 
-export const getTasks = () => dispatch => {
+export const getTasks = () => (dispatch, getState) => {
   axios
-    .get("/api/tasks/")
+    .get("/api/tasks/", tokenConfig(getState))
     .then(res => {
       dispatch({
         type: GET_TASKS,
@@ -21,9 +21,9 @@ export const getTasks = () => dispatch => {
 
 // DELETE TASK
 
-export const deleteTask = id => dispatch => {
+export const deleteTask = id => (dispatch, getState) => {
   axios
-    .delete(`/api/tasks/${id}/`)
+    .delete(`/api/tasks/${id}/`, tokenConfig(getState))
     .then(res => {
       dispatch(createMessage({ deleteTask: "Task Deleted" }));
       dispatch({
@@ -36,9 +36,12 @@ export const deleteTask = id => dispatch => {
 
 // ADD TASK
 
-export const addTask = task => dispatch => {
+export const addTask = task => (dispatch, getState) => {
+  const { title, desc, status } = task;
+  console.log(title, desc, status);
+  const body = JSON.stringify({ title, desc, status });
   axios
-    .post("/api/tasks/", task)
+    .post("/api/tasks/", body, tokenConfig(getState))
     .then(res => {
       dispatch(createMessage({ taskAdded: "Task Added" }));
       dispatch({

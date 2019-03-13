@@ -7,7 +7,6 @@ class Form extends Component {
   state = {
     title: "",
     desc: "",
-    assignee: "",
     status: "",
   };
 
@@ -21,20 +20,19 @@ class Form extends Component {
     });
   onSubmit = e => {
     e.preventDefault();
-    const { title, desc, assignee, status } = this.state;
-    const task = { title, desc, assignee, status };
+    const { title, desc, status } = this.state;
+    const task = { title, desc, status };
     console.log(task);
     this.props.addTask(task);
     this.setState({
       title: "",
       desc: "",
-      assignee: "",
       status: "",
     });
   };
 
   render() {
-    const { title, desc, assignee, status } = this.state;
+    const { title, desc, status } = this.state;
     return (
       <div className="card card-body mt-4 mb-4">
         <h2>Add Task</h2>
@@ -57,16 +55,6 @@ class Form extends Component {
               name="desc"
               onChange={this.onChange}
               value={desc}
-            />
-          </div>
-          <div className="form-group">
-            <label>Assignee</label>
-            <input
-              className="form-control"
-              type="text"
-              name="assignee"
-              onChange={this.onChange}
-              value={assignee}
             />
           </div>
           <div className="form-group">
