@@ -1,6 +1,6 @@
 from django.urls import path, include
 from rest_framework import routers
-from tasks.api import TaskViewSet, CommentViewSet
+from tasks.api.viewsapi import TaskViewSet, CommentViewSet
 
 router = routers.DefaultRouter()
 router.register('api/tasks', TaskViewSet, 'tasks')

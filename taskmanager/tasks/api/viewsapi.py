@@ -1,6 +1,6 @@
 from tasks.models import Task, Comment
 from rest_framework import viewsets, permissions
-from tasks.serializers import TaskSerializer, CommentSerializer
+from tasks.api.serializers import TaskSerializer, CommentSerializer
 
 # Task Viewset
 
