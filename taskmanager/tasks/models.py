@@ -3,8 +3,8 @@ from django.contrib.auth.models import User
 
 
 class Task(models.Model):
-    title = models.CharField(max_length=256, unique=True)
-    desc = models.CharField(max_length=256, blank=True, default="")
+    title = models.CharField(max_length=100)
+    desc = models.TextField(max_length=512, blank=True, default="")
     assignee = models.CharField(max_length=100, default="")
     status = models.CharField(max_length=256, blank=True)
     owner = models.ForeignKey(
@@ -13,14 +13,10 @@ class Task(models.Model):
 
     class Meta:
         ordering = ['-created_at']
+        unique_together = ('title', 'owner',)
 
     def __str__(self):
         return self.title
-
-    def save(self, *args, **kwargs):
-        if not self.assignee:
-            self.assignee = self.owner
-            super(Task, self).save(*args, **kwargs)
 
 
 class Comment(models.Model):

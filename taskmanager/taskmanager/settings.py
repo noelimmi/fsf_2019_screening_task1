@@ -37,16 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'tasks',
-    'rest_framework',
-    'frontend',
-    'knox',
-    'accounts',
+    'tasks.apps.TasksConfig',
+    'accounts.apps.AccountsConfig',
+    'usergroups.apps.UsergroupsConfig'
 ]
 
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',)
-}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -127,3 +122,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
+LOGIN_REDIRECT_URL = 'task-manager'
+
+LOGIN_URL = 'user-login'

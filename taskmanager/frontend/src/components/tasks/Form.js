@@ -8,6 +8,7 @@ class Form extends Component {
     title: "",
     desc: "",
     status: "",
+    taskcomments: [],
   };
 
   static propTypes = {
@@ -20,14 +21,17 @@ class Form extends Component {
     });
   onSubmit = e => {
     e.preventDefault();
-    const { title, desc, status } = this.state;
-    const task = { title, desc, status };
+    const { title, desc, status, taskcomments } = this.state;
+    //taskcomments.push("new");
+    console.log(taskcomments);
+    const task = { title, desc, status, taskcomments };
     console.log(task);
     this.props.addTask(task);
     this.setState({
       title: "",
       desc: "",
       status: "",
+      taskcomments: [],
     });
   };
 

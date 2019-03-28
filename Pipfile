@@ -4,13 +4,9 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
-autopep8 = "*"
-pylint = "*"
 
 [packages]
-djangorestframework = "==3.9.2"
-Django = "==2.1.7"
-django-rest-knox = "*"
+pillow = "*"
 
 [requires]
 python_version = "3.6"

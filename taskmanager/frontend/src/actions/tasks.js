@@ -37,11 +37,9 @@ export const deleteTask = id => (dispatch, getState) => {
 // ADD TASK
 
 export const addTask = task => (dispatch, getState) => {
-  const { title, desc, status } = task;
-  console.log(title, desc, status);
-  const body = JSON.stringify({ title, desc, status });
+  console.log(task);
   axios
-    .post("/api/tasks/", body, tokenConfig(getState))
+    .post("/api/tasks/", task, tokenConfig(getState))
     .then(res => {
       dispatch(createMessage({ taskAdded: "Task Added" }));
       dispatch({

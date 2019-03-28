@@ -1,0 +1,26 @@
+{%extends "tasks/base.html"%} 
+{% block content %}
+    <div class="col-md-6 m-auto">
+        <div class="card mx-auto card-body mt-5" >
+            <img class="card-img-top user mx-auto" src="{{user.profile.image.url}}">
+            <div class="card-body">
+                <h4 class="card-title text-center">{{user.username}}</h4>
+                <p class="card-text text-center">{{ user.email }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 m-auto">
+        <h2 class="text-center">Profile Info</h2>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ u_form.as_p }}
+                {{ p_form.as_p }}
+                <div class="col-md-3 text-center m-auto">
+                    <button class="btn btn-outline-info" type="submit">Update</button>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock content %}
+
