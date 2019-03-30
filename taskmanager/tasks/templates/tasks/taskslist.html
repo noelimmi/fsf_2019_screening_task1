@@ -1,42 +1,22 @@
-{%extends "tasks/dashboard.html"%}
-{% block taskslist %}
+{% extends "tasks/base.html" %}
+{% block content %}
 <h2>Tasks</h2>
 <table class="table table-hover">
     <thead>
         <tr>
-            <th>ID</th>
             <th>Title</th>
-            <th>Description</th>
             <th>Created</th>
-            <th>Assignee</th>
             <th>Status</th>
-            <th></th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
-    {% for task in tasks %}
-        <tr>
-        <td>{{task.id}}</td>
-        <td>{{task.title}}</td>
-        <td>{{task.desc}}</td>
-        <td>{{task.created_at}}</td>
-        <td>{{task.assignee}}</td>
-        <td>{{task.status}}</td>
-        <td>
-            <button class="btn btn-success btn-sm">
-            Edit 
-            </button>
-        </td>
-        <td>
-            <button
-            class="btn btn-danger btn-sm"
-            >
-            Delete
-            </button>
-        </td>
-        </tr>
-    {% endfor %}
+        {% for task in tasks %}
+            <tr class="table-active">
+            <td><a href="{% url 'task-detail' task.id %}">{{task.title}}</a></td>
+            <td>{{task.created_at}}</td>
+            <td>{{ task.get_status_display }}</td>
+            </tr>
+        {% endfor %}
     </tbody>
 </table>
-{% endblock taskslist %}
+{% endblock content %}

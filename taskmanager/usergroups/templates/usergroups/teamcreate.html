@@ -1,0 +1,17 @@
+{%extends "tasks/base.html"%} 
+{% block content %}
+    <div class="col-md-6 m-auto">
+        <div class="card card-body mt-5">
+            <h2 class="text-center">Create Team</h2>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    {{ teamform.as_p }}
+                    <div class="text-center m-auto">
+                        <button class="btn btn-outline-success" type="submit">Create</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock content %}

@@ -1,0 +1,21 @@
+{% extends "tasks/base.html" %}
+{% block content %}
+<div class="col-md-6 m-auto">
+    <div class="card card-body mt-5 mb-5">
+        <img class="card-img-top user mx-auto" src="{{object.teamicon.url}}">
+        <h2 class="text-center">{{object.name}}</h2>
+        <h4>Created By<h4>
+        <p class="p-3">{{object.admin}}</p>
+        <h4>Description<h4>
+        <p class="text-justify p-3">{{object.description}}</p>
+        <h4>Members<h4>
+        {% for member in object.member.all %}
+            <li class="p-3">{{member.username}}</li>
+        {% endfor %}
+        <div class="text-center m-auto form-group">
+            <h5>To View List of Non Members</h5>
+            <a class="btn btn-secondary btn-sm mt-1" href="{% url 'current_available' object.id %}">Click</a>
+        </div>
+    </div>
+</div>
+{% endblock content %}

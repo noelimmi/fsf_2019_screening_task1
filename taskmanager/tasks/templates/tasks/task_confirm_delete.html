@@ -1,0 +1,16 @@
+{% extends "tasks/base.html"%} 
+{% block content %}
+    <div class="col-md-6 m-auto">
+        <div class="card card-body mt-5">
+            <form method="POST">
+                {% csrf_token %}
+                <h2 class="text-center">Delete Post</h2>
+                <h3>Are you sure you want to delete "{{object.title}}"  task ?</h3>
+                <div class="text-center m-auto form-group">
+                    <button class="btn btn-danger" type="submit">Delete</button>
+                    <a class="btn btn-secondary" href="{% url 'task-detail' object.id %}">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock content %}

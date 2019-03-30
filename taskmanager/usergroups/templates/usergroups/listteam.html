@@ -1,0 +1,64 @@
+{%extends "tasks/base.html"%} 
+{% block content %}
+<div class="col mt-4">
+  <h2>My Teams</h2>
+  <div class="row mt-4"> 
+    {% for team in yourteams %}
+      <div class="card bg-light mb-3 mr-3" style="max-width: 20rem;">
+        <div class="card-header">{{ team.name }}</div>
+        <div class="card-body">
+          <img class="card-img-top user1 mx-auto d-block" src="{{team.teamicon.url}}">
+          <h4 class="card-title mt-3 text-center">Members</h4>
+          <div class="scrollable mx-auto">
+            {% for user in team.member.all %}
+              <p class="card-text">{{user.username}}</p>
+            {% endfor %}
+          </div>
+        </div>
+        <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+          <button type="button" class="btn btn-primary">Select</button>
+            <div class="btn-group" role="group">
+              <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+              <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                <a class="dropdown-item" href="{% url 'team-task-manager' team.id %}">View Tasks</a>
+                <a class="dropdown-item" href="{% url 'team-manager'%}">Team Manager</a>
+              </div>
+            </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+<div class="col mt-4">
+  <h2>Enrolled Teams</h2>
+  <div class="row mt-4 mx-auto"> 
+    {% for team in enrolledteams %}
+      <div class="card bg-light mb-3 mr-3" style="max-width: 20rem;">
+        <div class="card-header">{{ team.name }}</div>
+        <div class="card-body">
+          <img class="card-img-top user1 mx-auto d-block" src="{{team.teamicon.url}}">
+          <h4 class="card-title mt-3 text-center">Members</h4>
+          <div class="scrollable mx-auto">
+              {% for user in team.member.all %}
+                <p class="card-text">{{user.username}}</p>
+              {% endfor %}
+          </div>
+        </div>
+        <a class="btn btn-primary" href="{% url 'team-task-manager' team.id %}">View Tasks</a>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+<div class="card text-center mb-3">
+  <div class="card-header">
+    Create Team
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Task-Manager</h5>
+    <p class="card-text">Create teams and manage tasks for free click below to get started</p>
+    <a href="{% url 'create-team' %}" class="btn btn-primary">Click Here</a>
+  </div>
+</div>
+{% endblock content %}
+
+
