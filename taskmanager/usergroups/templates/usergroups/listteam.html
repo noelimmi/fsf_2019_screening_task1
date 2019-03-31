@@ -21,7 +21,7 @@
               <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
               <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                 <a class="dropdown-item" href="{% url 'team-task-manager' team.id %}">View Tasks</a>
-                <a class="dropdown-item" href="{% url 'team-manager'%}">Team Manager</a>
+                <a class="dropdown-item" href="{% url 'team-manager' team.id%}">Team Manager</a>
               </div>
             </div>
         </div>

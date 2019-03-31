@@ -1,21 +1,77 @@
 {% extends "tasks/base.html" %}
 {% block content %}
-<div class="col-md-6 m-auto">
-    <div class="card card-body mt-5 mb-5">
-        <img class="card-img-top user mx-auto" src="{{object.teamicon.url}}">
-        <h2 class="text-center">{{object.name}}</h2>
-        <h4>Created By<h4>
-        <p class="p-3">{{object.admin}}</p>
-        <h4>Description<h4>
-        <p class="text-justify p-3">{{object.description}}</p>
-        <h4>Members<h4>
-        {% for member in object.member.all %}
-            <li class="p-3">{{member.username}}</li>
-        {% endfor %}
-        <div class="text-center m-auto form-group">
-            <h5>To View List of Non Members</h5>
-            <a class="btn btn-secondary btn-sm mt-1" href="{% url 'current_available' object.id %}">Click</a>
+<ul class="nav nav-tabs mt-3">
+    <li class="nav-item">
+    <a class="nav-link active" data-toggle="tab" href="#home">Team Details</a>
+    </li>
+    <li class="nav-item">
+    <a class="nav-link" data-toggle="tab" href="#adremove">Add/Remove Members</a>
+    </li>
+    <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">Team Task</a>
+    <div class="dropdown-menu " x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 39px, 0px);">
+        <a class="dropdown-item" href="{% url 'team-task-manager' object.id %}">View Team Tasks</a>
+        <a class="dropdown-item" href="{% url 'team-task-create' object.id %}">Create Team Task</a>
+        <a class="dropdown-item " href="{% url 'delete-team' object.id %}">Delete Team</a>
+        <a class="dropdown-item" href="{% url 'update-team' object.id %}">Update Team Details</a>
+    <div class="dropdown-divider"></div>
+    </div>
+    </li>
+</ul>
+<div id="myTabContent" class="tab-content">
+    <div class="tab-pane fade active show" id="home">
+        <div class="col-md-6 m-auto">
+            <div class="card card-body mt-5 mb-5">
+                <img class="card-img-top user mx-auto" src="{{object.teamicon.url}}">
+                <h2 class="text-center">{{object.name}}</h2>
+                <h4>Created By</h4>
+                <p class="card-text p-3">{{object.admin}}</p>
+                <h4>Description</h4>
+                <p class="card-text text-justify p-3">{{object.description}}</p>
+                <h4>Members</h4>
+                {%if not object.member.all%}
+                    <p class="card-text p-3">No Member are yet Added</p>
+                {%else%}
+                    <ol>
+                        {% for member in object.member.all %}
+                            <li class="card-text p-3">{{member.username}}</li>
+                        {% endfor %}
+                    </ol>
+                {%endif%}
+            </div>
         </div>
     </div>
+    <div class="tab-pane fade" id="adremove">
+    <div class="col mt-4 mx-auto"> 
+        <div class="container">
+            <div class="card mb-3 mt-3">
+                <h3 class="card-header mt-3">Members Not In Team</h3>
+                <div class="card-body">
+                    <h5 class="card-title">Click + button to add in your team</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        {%for mem in nonmem%}
+                            <li class="list-group-item">{{mem.username}} &nbsp <a href="{% url 'changeteammember' mem.id object.id 'add' %}" class="mx-auto btn btn-outline-success btn-sm">+</a></li>
+                        {%endfor%}
+                    </ul>
+                </div>
+            </div>
+            <div class="card mb-3 mt-3">
+                <h3 class="card-header mt-3">Members In Team</h3>
+                <div class="card-body">
+                    <h5 class="card-title">Click - button to add in your team</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        {%for member in object.member.all%}
+                            <li class="list-group-item">{{member.username}} &nbsp <a href="{% url 'changeteammember' member.id object.id 'remove' %}" class="mx-auto btn btn-outline-danger btn-sm ">-</a></li>
+                        {%endfor%}
+                    </ul>
+                </div>
+             </div>
+        </div> 
+    </div> 
 </div>
+
 {% endblock content %}

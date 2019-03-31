@@ -1,8 +1,13 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib import messages
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Task
 from usergroups.models import Team
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.urls import reverse
+from django.contrib.auth.decorators import login_required
+from .forms import TeamTaskForm
+from django.http import HttpResponseForbidden
 
 
 class TaskListView(LoginRequiredMixin, ListView):
@@ -77,3 +82,35 @@ class TeamTaskListView(LoginRequiredMixin, UserPassesTestMixin, ListView):
         if self.request.user == team.admin or self.request.user.teammembers.filter(id=team.id).exists():
             return True
         return False
+
+
+class TeamTaskDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Task
+
+    def get_success_url(self):
+        task = self.get_object()
+        team = task.team
+        return reverse('team-task-manager', kwargs={'teamid': team.id})
+
+    def test_func(self):
+        task = self.get_object()
+        if self.request.user == task.team.admin:
+            return True
+        return False
+
+
+@login_required
+def teamtaskcreate(request, teamid):
+    if request.method == 'POST':
+        team = get_object_or_404(Team, pk=teamid)
+        form = TeamTaskForm(team, request.POST)
+        if form.is_valid():
+            task = form.save(commit=False)
+            task.team = team
+            task.owner = team.admin
+            task.save()
+            return redirect('team-task-manager', teamid=team.id)
+    else:
+        team = get_object_or_404(Team, pk=teamid)
+        form = TeamTaskForm(team)
+        return render(request, 'tasks/task_form.html', {'form': form})

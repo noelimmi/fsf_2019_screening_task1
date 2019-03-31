@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'tasks.apps.TasksConfig',
     'accounts.apps.AccountsConfig',
-    'usergroups.apps.UsergroupsConfig'
+    'usergroups.apps.UsergroupsConfig',
+    'crispy_forms'
 ]
 
 
@@ -129,3 +130,5 @@ MEDIA_URL = '/media/'
 LOGIN_REDIRECT_URL = 'task-manager'
 
 LOGIN_URL = 'user-login'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
