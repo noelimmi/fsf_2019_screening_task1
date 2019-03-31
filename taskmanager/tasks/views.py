@@ -7,7 +7,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from .forms import TeamTaskForm
-from django.http import HttpResponseForbidden
 
 
 class TaskListView(LoginRequiredMixin, ListView):
