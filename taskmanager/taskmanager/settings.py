@@ -132,3 +132,5 @@ LOGIN_REDIRECT_URL = 'task-manager'
 LOGIN_URL = 'user-login'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
