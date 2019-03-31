@@ -4,9 +4,9 @@
 
 ## Getting Started
 
-Python 3.6+ is required
+Python 3.6 above,
 Django 2.1
-Pipenv for managing virtual environment
+and Pipenv for managing virtual environment is required.
 
 ### Installing
 
@@ -53,8 +53,6 @@ run test using
 ```
 python manage.py test appname
 ```
-
-python manage.py test
 
 ## Built With
 
