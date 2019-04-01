@@ -7,6 +7,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from .forms import TeamTaskForm
+from .models import Comment
+from django.contrib.contenttypes.models import ContentType
 
 
 class TaskListView(LoginRequiredMixin, ListView):
@@ -20,7 +22,7 @@ class TaskListView(LoginRequiredMixin, ListView):
         Since user can be admin for many teams,so on his personal dashboard only should
         be populated by tasks made by him without the one from any of his team
         """
-        return self.request.user.tasks.filter(assignee=self.request.user)
+        return self.request.user.tasks.filter(owner=self.request.user, team__isnull=True)
 
 
 class TaskDetailView(LoginRequiredMixin, DetailView):

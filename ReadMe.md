@@ -1,12 +1,21 @@
 # Task Manager
 
-    A simple Task Manager Web app , where User can create Task and also create a Team with other users ,assign task to them. A Basic Profile is also created when user sign up. This is done as a part of  Screening test for FOSSEE PYTHON FELLOWSHIP 2019.
+    A simple Task Manager Web app , where User can create Task and also create a Team with other users ,assign task to them. <br/>
+    A Basic Profile is also created when user sign up. This is done as a part of Screening test for FOSSEE PYTHON FELLOWSHIP 2019.<br/>
 
-## Getting Started
+## Requirements
 
 Python 3.6 above,
 Django 2.1
-and Pipenv for managing virtual environment is required.
+Pipenv for managing virtual environment
+pillow 5.4.1 for working with image uploaded on server
+django-crispy-forms = 1.7.2 for adding Bootstrap on Django Forms
+
+## Added features
+
+A basic Profile is set up when user sign up, also user can update his profile.<br/>
+Teams also can have team icon.<br/>
+Images uploaded on server is resized to reduce space.
 
 ### Installing
 
