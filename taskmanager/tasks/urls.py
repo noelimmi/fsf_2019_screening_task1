@@ -1,14 +1,18 @@
 from django.urls import path
-from .views import TaskListView, TaskDetailView, TaskCreateView, TaskUpdateView, TaskDeleteView, TeamTaskListView, TeamTaskDeleteView
+from .views import TaskListView, TaskDetailView, TaskCreateView, TaskUpdateView, TaskDeleteView, TeamTaskListView, TeamTaskDeleteView, CommentDeleteView
 from . import views
 
 urlpatterns = [
+    path('teamtask/<int:pk>/detail/',
+         views.teamtaskdetailview, name='teamtask-detail'),
     path('teamtask/<int:teamid>/', TeamTaskListView.as_view(),
          name='team-task-manager'),
     path('teamtask/<int:teamid>/new/',
          views.teamtaskcreate, name='team-task-create'),
     path('teamtask/<int:pk>/delete/',
          TeamTaskDeleteView.as_view(), name='team-task-delete'),
+    path('comment/<int:pk>/delete/',
+         CommentDeleteView.as_view(), name='comment-delete'),
     path('', TaskListView.as_view(), name='task-manager'),
     path('task/<int:pk>/', TaskDetailView.as_view(), name='task-detail'),
     path('task/new/', TaskCreateView.as_view(), name='task-create'),

@@ -22,6 +22,17 @@ class Task(models.Model):
         Team, related_name="teamtasks", on_delete=models.CASCADE, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
+    @property
+    def comments(self):
+        queryset = Comment.objects.filter_by_instance(self)
+        return queryset
+
+    @property
+    def get_content_type(self):
+        task = self
+        content_type = ContentType.objects.get_for_model(task.__class__)
+        return content_type
+
     class Meta:
         ordering = ['-created_at']
         unique_together = ('title', 'owner',)
@@ -29,8 +40,18 @@ class Task(models.Model):
     def __str__(self):
         return self.title
 
-    def get_absolute_url(self):
-        return reverse('task-detail', kwargs={'pk': self.pk})
+
+class CommentManager(models.Manager):
+    def filter_by_instance(self, instance):
+        """ 
+        Since Comment is a generic foreign key any Model class can be its instance 
+        used name instance and to get its class name instance.__class__ is used
+        """
+        content_type = ContentType.objects.get_for_model(instance.__class__)
+        object_id = instance.id
+        query_set = super(CommentManager, self).filter(
+            content_type=content_type, object_id=object_id)
+        return query_set
 
 
 class Comment(models.Model):
@@ -42,8 +63,10 @@ class Comment(models.Model):
     content = models.CharField(max_length=256)
     timestamp = models.DateTimeField(auto_now_add=True)
 
+    objects = CommentManager()
+
     class Meta:
         ordering = ['-timestamp']
 
     def __str__(self):
-        return '%s:%s' % (self.user, self.content)
+        return '%s-%s' % (self.user, self.content)

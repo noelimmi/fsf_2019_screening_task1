@@ -1,13 +1,12 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import Task
+from .models import Task, Comment
 from usergroups.models import Team
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-from .forms import TeamTaskForm
-from .models import Comment
+from .forms import TeamTaskForm, CommentForm
 from django.contrib.contenttypes.models import ContentType
 
 
@@ -30,6 +29,7 @@ class TaskDetailView(LoginRequiredMixin, DetailView):
 
 
 class TaskCreateView(LoginRequiredMixin, CreateView):
+    success_url = '/'
     model = Task
     fields = ['title', 'desc', 'status']
 
@@ -67,7 +67,7 @@ class TaskDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 class TeamTaskListView(LoginRequiredMixin, UserPassesTestMixin, ListView):
 
     context_object_name = 'tasks'
-    template_name = 'tasks/taskslist.html'
+    template_name = 'tasks/teamtaskslist.html'
     model = Task
     ordering = ['-created_at']
 
@@ -115,3 +115,48 @@ def teamtaskcreate(request, teamid):
         team = get_object_or_404(Team, pk=teamid)
         form = TeamTaskForm(team)
         return render(request, 'tasks/task_form.html', {'form': form})
+
+
+@login_required
+def teamtaskdetailview(request, pk):
+    task = get_object_or_404(Task, pk=pk)
+    comments = task.comments
+    initial_data = {
+        "content_type": task.get_content_type,
+        "object_id": task.id
+    }
+    comment_form = CommentForm(request.POST or None, initial=initial_data)
+    if comment_form.is_valid():
+        c_type = comment_form.cleaned_data.get("content_type")
+        content_type = ContentType.objects.get(model=c_type)
+        obj_id = comment_form.cleaned_data.get("object_id")
+        content_data = comment_form.cleaned_data.get("content")
+        new_comment, created = Comment.objects.get_or_create(
+            user=request.user,
+            content_type=content_type,
+            object_id=obj_id,
+            content=content_data
+        )
+
+    context = {
+        "object": task,
+        "comments": comments,
+        "comment_form": comment_form
+    }
+    return render(request, "tasks/teamtask_detail.html", context)
+
+
+class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Comment
+
+    def get_success_url(self):
+        comment = self.get_object()
+        pk = comment.object_id
+
+        return reverse('teamtask-detail', kwargs={'pk': pk})
+
+    def test_func(self):
+        comment = self.get_object()
+        if self.request.user == comment.user:
+            return True
+        return False

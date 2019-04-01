@@ -1,6 +1,6 @@
 {% extends "tasks/base.html" %}
 {% block content %}
-<h2>User Tasks</h2>
+<h2>Team Tasks</h2>
 <small>click on task title to view task details</small>
 <table class="table table-hover">
     <thead>
@@ -13,7 +13,7 @@
     <tbody>
         {% for task in tasks %}
             <tr class="table-active">
-            <td><a href="{% url 'task-detail' task.id %}">{{task.title}}</a></td>
+            <td><a href="{% url 'teamtask-detail' task.id %}">{{task.title}}</a></td>
             <td>{{task.created_at}}</td>
             <td>{{ task.get_status_display }}</td>
             </tr>

@@ -1,0 +1,49 @@
+{% extends "tasks/base.html" %}
+{% block content %}
+{%load crispy_forms_tags%}
+<div class="col-md-6 m-auto">
+    <div class="card card-body mt-5 mb-5">
+        <h2 class="text-center">{{object.title}}</h2>
+        <h4>Created By</h4>
+        <p class="card-text p-3">{{object.owner}}</p>
+        <h4>Description</h4>
+        <p class="text-justify card-text p-3">{{object.desc}}</p>
+        <h4>Created At</h4>
+        <p class="card-text p-3">{{object.created_at}}</p>
+        <h4>Assignee</h4>
+        {% for assignee in object.assignee.all %}
+            <p class="card-text p-3">{{assignee.username}}</p>
+        {% endfor %}
+        <h4>Status</h4>
+        <p class="card-text p-3">{{ object.get_status_display }}</p>
+        {% if object.team.admin == user %}
+        <div class="text-center m-auto form-group">
+            <a class="btn btn-info btn-sm mt-1" href="{% url 'task-update' object.id %}">Update</a>
+            <a class="btn btn-danger btn-sm mt-1" href="{% url 'team-task-delete' object.id %}">Delete</a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+<div class="col-md-6 m-auto">
+    <div class="card card-body mt-5 mb-5">
+        <h4>Comments</h4>
+        <form method="POST">
+            {% csrf_token %}
+            {{ comment_form|crispy }}
+            <button class="btn btn-primary" type="submit">Post</button>
+        </form>
+        <hr/>
+        {% for comment in comments %}
+        <blockquote class="blockquote">
+            <p class="mb-0">{{comment.content}}</p>
+            <footer>by {{comment.user}} | {{comment.timestamp|timesince}} ago 
+            {% if comment.user == user %}
+                <a href="{% url 'comment-delete' comment.id %}">Delete</a> 
+            {%endif%}
+            </footer>
+        </blockquote>
+        <hr/>
+        {%endfor%}
+    </div> 
+</div>
+{% endblock content %}
