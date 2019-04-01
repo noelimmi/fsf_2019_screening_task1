@@ -8,10 +8,10 @@ This is done as a part of Screening test for FOSSEE PYTHON FELLOWSHIP 2019.
 ## Requirements
 
 Python 3.6 above,
-Django 2.1
-Pipenv for managing virtual environment
-pillow 5.4.1 for working with image uploaded on server
-django-crispy-forms = 1.7.2 for adding Bootstrap on Django Forms
+Django 2.1,
+Pipenv for managing virtual environment,
+pillow 5.4.1 for working with image uploaded on server,
+django-crispy-forms = 1.7.2 for adding Bootstrap on Django Forms.
 
 ## Added features
 
@@ -68,7 +68,3 @@ python manage.py test appname
 ## Built With
 
 - [Django](https://www.djangoproject.com/) - The web framework used
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
