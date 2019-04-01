@@ -1,7 +1,9 @@
 # Task Manager
 
-    A simple Task Manager Web app , where User can create Task and also create a Team with other users ,assign task to them. <br/>
-    A Basic Profile is also created when user sign up. This is done as a part of Screening test for FOSSEE PYTHON FELLOWSHIP 2019.<br/>
+A simple Task Manager Web app , where User can create Task and also
+create a Team with other users ,assign task to them.
+A Basic Profile is also created when user sign up.
+This is done as a part of Screening test for FOSSEE PYTHON FELLOWSHIP 2019.
 
 ## Requirements
 
