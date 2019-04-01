@@ -15,12 +15,18 @@ django-crispy-forms = 1.7.2 for adding Bootstrap on Django Forms.
 
 ## Features
 
-Users can register and login.
-Create Personal Task or can create a Team.
-User can add other members in System as team-members.
-User can assign task to his team members.
-Team members can comment on those tasks.
-Only Teammembers Can View Team Task and Comment on it.
+Users can register and login.  
+Create Personal Task or can create a Team.  
+User can add other members in System as team-members.  
+User can assign task to his team members.  
+Team members can comment on those tasks.  
+Only Team members Can View Team Task and Comment on it.  
+Only Team Admin can create Task in his team.
+
+
+
+
+
 
 ## Added features
 
