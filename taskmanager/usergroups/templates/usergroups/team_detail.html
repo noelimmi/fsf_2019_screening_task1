@@ -55,7 +55,7 @@
                             <tr class="table-active">
                                 <td >{{mem.username}}</td>
                                 <td><a href="{% url 'changeteammember' mem.id object.id 'add' %}" class="mx-auto btn btn-outline-success btn-sm"><strong>Add</strong></a></td>
-                                <td></td>
+                                <td><a href="{% url 'user_profile_detail' mem.id %}" class="mx-auto btn btn-outline-info btn-sm">View Profile</a></td>
                             </tr>
                         {%endfor%}
                     </table>
@@ -71,7 +71,8 @@
                         {%for member in object.member.all%}
                         <tr class="table-active">
                             <td>{{member.username}}</td>
-                            <td><a href="{% url 'changeteammember' member.id object.id 'remove' %}" class="mx-auto btn btn-outline-danger btn-sm "><strong>Remove</strong></a></td>
+                            <td><a href="{% url 'changeteammember' member.id object.id 'remove' %}" class="mx-auto btn btn-outline-danger btn-sm"><strong>Remove</strong></a></td>
+                            <td><a href="{% url 'user_profile_detail' member.id %}" class="mx-auto btn btn-outline-info btn-sm">View Profile</a></td>
                         </tr>
                         {%endfor%}
                     </table>

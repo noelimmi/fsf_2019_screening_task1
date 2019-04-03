@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
+from django.views.generic import DetailView
+from django.contrib.auth.models import User
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 def register(request):
@@ -41,3 +44,8 @@ def profile(request):
         'p_form': p_form
     }
     return render(request, 'accounts/profile.html', context)
+
+
+class UserProfileDetail(LoginRequiredMixin, DetailView):
+    model = User
+    template_name = 'accounts/user_detail.html'

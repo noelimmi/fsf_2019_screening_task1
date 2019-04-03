@@ -1,0 +1,21 @@
+{%extends "tasks/base.html"%} 
+{% block content %}
+    <div class="col-md-6 m-auto">
+        <div class="card mx-auto card-body mt-5" >
+            <img class="card-img-top user mx-auto" src="{{object.profile.image.url}}">
+            <div class="card-body">
+                <h4 class="card-title text-center">{{object.username}}</h4>
+                <p class="card-text text-center">{{ object.email }}</p>
+                <div class="text-center m-auto">
+                     {%if object.profile.github %}
+                        <a href="{{ user.profile.github }}" class="fa fa-github"></a>
+                    {%endif%}
+                    {%if object.profile.linkedin %}
+                        <a href="{{ user.profile.linkedin }}" class="fa fa-linkedin"></a>
+                    {%endif%}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
