@@ -7,6 +7,7 @@
   background-position: center center;
   background-size: cover;
 }
+
 .user1 {
   display: inline-block;
   width: 150px;
@@ -16,10 +17,12 @@
   background-position: center center;
   background-size: cover;
 }
+
 .imgwrapper {
   vertical-align: middle;
   text-align: center;
 }
+
 .scrollable {
   margin: 5px;
   padding: 5px;
@@ -29,6 +32,7 @@
   overflow: auto;
   text-align: justify;
 }
+
 .fa {
   padding: 20px;
   font-size: 30px;
@@ -47,10 +51,12 @@
   background: #007bb5;
   color: white;
 }
+
 .fa-github {
   background: #000000;
   color: white;
 }
+
 .card-inner {
   margin-left: 4rem;
 }

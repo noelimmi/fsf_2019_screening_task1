@@ -43,9 +43,9 @@ def change_teammember(request, userid, teamid, operation):
             request, f'{user.username} has been removed from your team!')
         return redirect('team-manager', pk=team.id)
     else:
-        messages.warning(
-            request, f'{request.user.username} Please specify an action to perform!')
-        return redirect('team-manager', pk=team.id)
+        data['msg'] = f'{request.user.username} Please specify an action to perform!'
+
+        return JsonResponse(data, safe=False)
 
 
 @login_required

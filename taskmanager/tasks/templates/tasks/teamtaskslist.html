@@ -1,7 +1,7 @@
 {% extends "tasks/base.html" %}
 {% block content %}
 <h2>Team Tasks</h2>
-<small class="text-muted" >click on task title to view task details</small>
+<small class="text-muted" >click on task to view task details</small>
 <table class="table table-hover">
     <thead>
         <tr>
@@ -12,12 +12,19 @@
     </thead>
     <tbody>
         {% for task in tasks %}
-            <tr class="table-active">
-            <td><a href="{% url 'teamtask-detail' task.id %}">{{task.title}}</a></td>
+            <tr class="clickable-row table-active " data-href="{% url 'teamtask-detail' task.id %}">
+            <td>{{task.title}}</td>
             <td>{{task.created_at}}</td>
             <td>{{ task.get_status_display }}</td>
             </tr>
         {% endfor %}
     </tbody>
 </table>
+<script>
+    $(document).ready(()=> {
+        $(".clickable-row").click(function() {
+            window.location = $(this).data("href");
+        });
+    });
+    </script>
 {% endblock content %}
